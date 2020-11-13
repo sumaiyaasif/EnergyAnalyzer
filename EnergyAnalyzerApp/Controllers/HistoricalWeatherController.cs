@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using EnergyAnalyzerApp.EnergyUsage;
 using EnergyAnalyzerApp.Weather;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ namespace EnergyAnalyzerApp.Controllers
     [Route("[controller]")]
     public class HistoricalWeatherController : ControllerBase
     {
-        
+
         private readonly ILogger<HistoricalWeatherController> _logger;
         private IWeatherService _weatherService;
 
@@ -29,9 +30,10 @@ namespace EnergyAnalyzerApp.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<string> Get()
+        public List<WeatherModel> Get(DateTime startDate, DateTime endDate)
         {
-            return await _weatherService.ServiceCall("2020-06-01", "2020-06-30", 33.749, -84.388).Result.Content.ReadAsStringAsync();
+            return _weatherService.HistoricalWeather(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"), 33.749, -84.388);
+            //return await _weatherService.HistoricalWeather(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"), 33.749, -84.388).Result.Content.ReadAsStringAsync();
         }
     }
 }

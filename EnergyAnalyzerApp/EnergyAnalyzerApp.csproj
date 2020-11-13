@@ -8,8 +8,12 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Custom' " />
   <ItemGroup>
     <Folder Include="Weather\" />
+    <Folder Include="EnergyUsage\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="3.1.9" />
   </ItemGroup>
 </Project>
