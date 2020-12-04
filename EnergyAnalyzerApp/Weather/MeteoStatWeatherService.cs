@@ -20,7 +20,10 @@ namespace EnergyAnalyzerApp.Weather
         {
             var serviceResponse = ServiceCall(startDate, endDate, latitude, longitude);
             string result = serviceResponse.Result.Content.ReadAsStringAsync().Result;
-            MeteoStatWeatherResponse meteoStatWeatherResponse = JsonConvert.DeserializeObject<MeteoStatWeatherResponse>(result);
+            MeteoStatWeatherResponse meteoStatWeatherResponse = JsonConvert.DeserializeObject<MeteoStatWeatherResponse>(result, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
             List<WeatherModel> historicalWeather = new List<WeatherModel>();
             foreach (var element in meteoStatWeatherResponse.Data)
             {

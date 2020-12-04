@@ -28,13 +28,14 @@ namespace EnergyAnalyzerApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            services.AddCors(); 
             services.AddControllers();
             services.AddSingleton<IWeatherService, MeteoStatWeatherService>();
             services.AddTransient<IEnergyUsageService, EnergyUsageSMTApi>();
 
             services.AddSwaggerGen();
           
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +44,13 @@ namespace EnergyAnalyzerApp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                app.UseCors(builder => builder
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .SetIsOriginAllowed((host) => true)
+                .AllowCredentials()
+            );
             }
             app.UseSwagger();
 
