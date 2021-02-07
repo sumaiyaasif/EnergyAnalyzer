@@ -30,9 +30,9 @@ namespace EnergyAnalyzerApp.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<string> Get()
+        public async Task<string> Get(DateTime start, DateTime end)
         {
-            return await _energyUsageService.getDailyUsage(DateTime.Now, DateTime.Now).Result.Content.ReadAsStringAsync();
+            return await _energyUsageService.getDailyUsage(start, end).Result.Content.ReadAsStringAsync();
         }
     }
 }
